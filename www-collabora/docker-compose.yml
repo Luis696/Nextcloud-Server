@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  collab:
+    image: collabora/code
+    container_name: nextcloud-collab
+    environment:
+
+      - VIRTUAL_PORT=9980
+      - VIRTUAL_HOST=collabroonline.lekwi.de
+      - LETSENCRYPT_HOST=collabroonline.lekwi.de
+      - LETSENCRYPT_EMAIL=luiskre@googlemail.com
+    restart: always
+    cap_add:
+      - ALL
+    expose:
+      - 9980
+
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

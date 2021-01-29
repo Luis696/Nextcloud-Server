@@ -1,0 +1,33 @@
+version: '3.6'
+
+services:
+
+         portainer:
+                image: portainer/portainer
+                container_name: portainer
+                command: -H unix:///var/run/docker.sock
+                restart: always
+                ports:
+
+                        - 9000:9000
+                        - 8000:8000
+                volumes:
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        - portainer_data:/data
+
+                environment:
+                         - VIRTUAL_HOST=portainer.lekwi.de
+                         - VIRTUAL_PORT=9000
+                         - LETSENCRYPT_HOST=portainer.lekwi.de
+                         - LETSENCRYPT_EMAIL=luiskre@googlemail.com
+
+
+
+
+volumes:
+ portainer_data:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
